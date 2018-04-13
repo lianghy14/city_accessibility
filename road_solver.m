@@ -1,9 +1,9 @@
 function [f,fval,sum_f] = road_solver(point,boundary,OD,i_in,i_out)
 [m,n] = size(OD);
-N3 = m*n;
-N2 = size(boundary,1);
-N1 = size(point,1);
-A2 = zeros(N1*N3,N2*N3);
+N3 = m*n; % number of flow kinds
+N2 = size(boundary,1); % number of roads
+N1 = size(point,1); % number of points
+A2 = zeros(N1*N3,N2*N3); 
 b2 = zeros(N1*N3,1);
 Map = zeros(N1,N2);
 for i = 1:N2;
@@ -46,25 +46,24 @@ for i = 1:N2
 end
 f0 = zeros(N2*N3,1);
 lb = f0;
-options = optimoptions('fmincon','Diagnostics','','Display','iter','MaxFunEvals',50000);
+options = optimoptions('fmincon','Diagnostics','on','Display','iter','MaxFunEvals',1000000,'TolFun',1e-4);
 [f,fval] = fmincon(@obj_fun,f0,[],[],A2,b2,lb,[],[],options,boundary,OD);
+
 for i = 1:N2
     j = 1:N3;
-    sum_f(i) = sum(f((j-1)*N2+i));on
-    hold on;
-    line(point(boundary(i,1:2),1),point(boundary(i,1:2),2),'LineWidth',10*sum_f(i));
-    %line(p(b(i,1:2),1),p(b(i,1:2),2),'LineWidth',f(6*N2+i));
-end
+    sum_f(i) = sum(f((j-1)*N2+i));
 end
 
-function obj = obj_fun(f,b,OD)
+end
+
+function obj = obj_fun(f,boundary,OD)
 [m,n] = size(OD);
 N3 = m * n;
-N2 = size(b,1);
+N2 = size(boundary,1);
 obj = 0;
 for i = 1:N2
     j = 1:N3;
     sum_f = sum(f((j-1)*N2+i));
-    obj = obj + sum_f^3 * b(i,3) / b(i,4);
+    obj = obj + sum_f^3 * boundary(i,3) / boundary(i,4);
 end
 end
