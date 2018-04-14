@@ -29,7 +29,7 @@ for i = 1 : size(p_cross,1)
     for j = 1:4
         point = [point;x+dir(j,:)];
     end
-    boundary = [boundary; (i-1)*4+1,(i-1)*4+2; (i-1)*4+2,(i-1)*4+3; (i-1)*4+3,(i-1)*4+4; (i-1)*4+4,(i-1)*4+1]; %four roads around the cross
+    boundary = [boundary; (i-1)*4+1,(i-1)*4+2; (i-1)*4+2,(i-1)*4+3; (i-1)*4+3,(i-1)*4+4; (i-1)*4+4,(i-1)*4+1]; %four roads around the cross by anti-clock
     dir2 = l_roads * [1,0; 0,1; -1,0; 0,-1];
     for j = 1:4 % four points in a cross
         x1 = x + dir2(j,:);
@@ -61,15 +61,16 @@ for i = 1:size(boundary,1)
     judge5 = (abs(point(boundary(i,1),1)) <= wid_cross / 2) && (abs(point(boundary(i,2),1)) <= wid_cross / 2);
     judge6 = (round(boundary(i,3)*10000) == round(wid_cross*10000)) && (point(boundary(i,1),1) == point(boundary(i,2),1));
     if (((judge1&&judge2)) && (judge3 == 0)) || (((judge4&&judge5)) && (judge6 == 0))
-        boundary(i,4) = 1; % 1:vehicle; 0:cycling
-        boundary(i,3) = 99;
+        %boundary(i,4) = 1; % 1:vehicle; 0:cycling
+        %boundary(i,3) = 99;
+        boundary(i,4) = 0;
     else
         boundary(i,4) = 1;
     end;
 end;
 
-%sor = find(boundary(:,4) == 1);
-%boundary = boundary(sor,1:4);
+sor = find(boundary(:,4) == 1);
+boundary = boundary(sor,1:4);
 
 for i = 1:size(boundary,1)
     hold on;
