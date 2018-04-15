@@ -54,24 +54,43 @@ boundary = unique(boundary,'rows');
 for i = 1:size(boundary,1)
     len = norm(point(boundary(i,1),:) - point(boundary(i,2),:));
     boundary(i,3) = len;
-    judge1 = (abs(point(boundary(i,1),1)) < size_net / 2) || (abs(point(boundary(i,2),1)) < size_net / 2);
+    judge1 = (abs(point(boundary(i,1),1)) < (size_net - wid_cross) / 2) || (abs(point(boundary(i,2),1)) < (size_net - wid_cross) / 2);
     judge2 = (abs(point(boundary(i,1),2)) <= wid_cross / 2) && (abs(point(boundary(i,2),2)) <= wid_cross / 2);
     judge3 = (round(boundary(i,3)*10000) == round(wid_cross*10000)) && (point(boundary(i,1),2) == point(boundary(i,2),2));
-    judge4 = (abs(point(boundary(i,1),2)) < size_net / 2) || (abs(point(boundary(i,2),2)) < size_net / 2);
+    judge4 = (abs(point(boundary(i,1),2)) < (size_net - wid_cross) / 2) || (abs(point(boundary(i,2),2)) < (size_net - wid_cross) / 2);
     judge5 = (abs(point(boundary(i,1),1)) <= wid_cross / 2) && (abs(point(boundary(i,2),1)) <= wid_cross / 2);
     judge6 = (round(boundary(i,3)*10000) == round(wid_cross*10000)) && (point(boundary(i,1),1) == point(boundary(i,2),1));
     if (((judge1&&judge2)) && (judge3 == 0)) || (((judge4&&judge5)) && (judge6 == 0))
         %boundary(i,4) = 1; % 1:vehicle; 0:cycling
         %boundary(i,3) = 99;
-        boundary(i,4) = 0;
+        boundary(i,4) = 1 - mode;
     else
         boundary(i,4) = 1;
     end;
 end;
-
+% fprintf('\n');
+% disp(size(boundary,1));
 sor = find(boundary(:,4) == 1);
 boundary = boundary(sor,1:4);
-
+i = 1;
+while i<=size(point,1)
+    if (any(boundary(:,1)==i)==0)&&(any(boundary(:,2)==i)==0)
+%        disp(point(i,:));
+%        fprintf('\n');
+        point(i,:) = [];
+        for j = 1:size(boundary,1)
+            if (boundary(j,1)>i)
+                boundary(j,1) = boundary(j,1) - 1;
+            end;
+            if (boundary(j,2)>i)
+                boundary(j,2) = boundary(j,2) - 1;
+            end;
+        end;
+    else
+        i = i+1;
+    end;
+end;
+    
 for i = 1:size(boundary,1)
     hold on;
     if (mode<=boundary(i,4))
@@ -82,5 +101,4 @@ for i = 1:size(boundary,1)
         %text((point(boundary(i,1),1)+point(boundary(i,2),1))/2,(point(boundary(i,1),2)+point(boundary(i,2),2))/2,num2str(i));
     end;
 end
-hold off
 end
