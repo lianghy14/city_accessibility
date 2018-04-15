@@ -1,4 +1,4 @@
-function [point,boundary]=network_gen(size_net,div,mode)
+function [point,boundary]=network_gen(size_net,div,mode,wid_cross)
 
 p_cross = []; % Coordinates of central point of crosses
 x_center = [0;0]; % Coordinates of central point of the network
@@ -19,18 +19,18 @@ end
 
 p_cross = unique(p_cross,'rows'); % generate coordinates of all crosses
 
-wid_cross = 0.1; % width of crosses
+wid_cross = l_roads * wid_cross; % width of crosses
 point = []; % coordinates of points
 boundary = []; % point boundaries' ip for each road
 
 for i = 1 : size(p_cross,1)
     x = p_cross(i,:);
-    dir = wid_cross * [0.5,0.5; -0.5,0.5; -0.5,-0.5; 0.5,-0.5];
+    dir = wid_cross .* [0.5,0.5; -0.5,0.5; -0.5,-0.5; 0.5,-0.5];
     for j = 1:4
         point = [point;x+dir(j,:)];
     end
     boundary = [boundary; (i-1)*4+1,(i-1)*4+2; (i-1)*4+2,(i-1)*4+3; (i-1)*4+3,(i-1)*4+4; (i-1)*4+4,(i-1)*4+1]; %four roads around the cross by anti-clock
-    dir2 = l_roads * [1,0; 0,1; -1,0; 0,-1];
+    dir2 = l_roads .* [1,0; 0,1; -1,0; 0,-1];
     for j = 1:4 % four points in a cross
         x1 = x + dir2(j,:);
         for k = 1 : size(p_cross,1)
@@ -90,12 +90,12 @@ while i<=size(point,1)
         i = i+1;
     end;
 end;
-    
+
 for i = 1:size(boundary,1)
     hold on;
     if (mode<=boundary(i,4))
         line(point(boundary(i,1:2),1),point(boundary(i,1:2),2),'Color','blue');
-        %text((point(boundary(i,1),1)+point(boundary(i,2),1))/2,(point(boundary(i,1),2)+point(boundary(i,2),2))/2,num2str(i));
+        text((point(boundary(i,1),1)+point(boundary(i,2),1))./2,(point(boundary(i,1),2)+point(boundary(i,2),2))./2,num2str(i));
     else
         %line(point(boundary(i,1:2),1),point(boundary(i,1:2),2),'Color','red');
         %text((point(boundary(i,1),1)+point(boundary(i,2),1))/2,(point(boundary(i,1),2)+point(boundary(i,2),2))/2,num2str(i));

@@ -1,3 +1,4 @@
-for i = 1:size(i_OD,2)
-    disp(any(any(boundary(:,1)==i_OD(i))));
-end;
+[X,Y] = meshgrid(-1:2);
+V = map;
+[xx,yy] = meshgrid(-1:0.1:2);
+vv = interp2(X,Y,V,xx,yy,'cubic');
