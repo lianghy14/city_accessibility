@@ -1,4 +1,4 @@
-function [f,fval,sum_f] = road_solver(point,boundary,OD,i_in,i_out,mode)
+function [f,fval,sum_f] = road_solver(point,boundary,OD,i_in,i_out,mode,f0)
 [m,n] = size(OD);
 N3 = m*n; % number of flow kinds
 N2 = size(boundary,1); % number of roads
@@ -44,9 +44,8 @@ b2((m-1)*N1+1) = [];
 %         b2 = [b2;zeros(N3,1)];
 %     end
 % end
-f0 = zeros(N2*N3,1);
-lb = f0;
-options = optimoptions('fmincon','Diagnostics','on','Display','iter','MaxFunEvals',500000,'TolFun',1e-4);
+lb = zeros(N2*N3,1);
+options = optimoptions('fmincon','Diagnostics','on','Display','iter','MaxFunEvals',1000000,'TolFun',1e-4);
 [f,fval] = fmincon(@obj_fun,f0,[],[],A2,b2,lb,[],[],options,boundary,OD,mode);
 
 for i = 1:N2

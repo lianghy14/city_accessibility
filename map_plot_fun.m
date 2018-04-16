@@ -1,5 +1,5 @@
 function [map] = map_plot_fun(div,size_net,wid_cross,point,boundary,sum_f)
-size_map = div*2;
+size_map = (div+1)*2;
 l_r = size_net / div - wid_cross;
 map = zeros(size_map,size_map);
 for i = 1:size_map
@@ -28,18 +28,29 @@ for i = 1:size_map
         map_f = 0;count = 0;
 %         disp(ip_boundary');
 %         fprintf('\n');
-        for k = 1:4
-            if ip_boundary(k)~=0
-                map_f = map_f + sum_f(ip_boundary(k));
-                count = count+1;
-            else
-                map_f = map_f + 0;
-                count = count+1;
-            end;
+        switch size(find(ip_boundary == 0),1)
+            case {0,1,2}
+                for k = 1:4
+                    if ip_boundary(k)~=0
+                        map_f = map_f + sum_f(ip_boundary(k));
+                    end;
+                    count = count+1;
+                end;
+            case 3
+                for k = 1:4
+                    if ip_boundary(k)~=0
+                        map_f = map_f + sum_f(ip_boundary(k));
+                    end;
+                end;
+                count = 1;
         end;
         map(i,j) = map_f/count;
     end;
 end;
+map(1,1) = mean([map(2,1),map(1,2)]);
+map(1,size_map) = mean([map(2,size_map),map(1,size_map-1)]);
+map(size_map,1) = mean([map(size_map-1,1),map(size_map,2)]);
+map(size_map,size_map) = mean([map(size_map-1,size_map),map(size_map,size_map-1)]);
 end
 
 
