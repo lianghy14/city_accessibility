@@ -1,4 +1,4 @@
-function [obj,obj_tot] = cost_flow_fun(wid_r,len_r,sum_f,mode)
+function [obj,obj_tot,time_cost] = cost_flow_fun(wid_r,len_r,sum_f,mode)
 % 0:cycling 1:vehicle;
 
 m0 = [0.2,1.36]; % money cost
