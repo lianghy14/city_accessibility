@@ -48,9 +48,9 @@ ylabel('\itg_r');
 ylim([0,Inf])
 hold off
 
-saveas(figure1,'0416figure\figure_model_1.png');
-saveas(figure2,'0416figure\figure_model_2.png');
-saveas(figure3,'0416figure\figure_model_3.png');
-saveas(figure4,'0416figure\figure_model_4.png');
+saveas(figure1,'0417figure\figure_model_1.png');
+saveas(figure2,'0417figure\figure_model_2.png');
+saveas(figure3,'0417figure\figure_model_3.png');
+saveas(figure4,'0417figure\figure_model_4.png');
 
 

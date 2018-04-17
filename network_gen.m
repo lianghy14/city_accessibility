@@ -90,15 +90,16 @@ while i<=size(point,1)
         i = i+1;
     end;
 end;
-
-for i = 1:size(boundary,1)
-    hold on;
-    if (mode<=boundary(i,4))
-        line(point(boundary(i,1:2),1),point(boundary(i,1:2),2),'Color','blue');
-        text((point(boundary(i,1),1)+point(boundary(i,2),1))./2,(point(boundary(i,1),2)+point(boundary(i,2),2))./2,num2str(i));
-    else
-        %line(point(boundary(i,1:2),1),point(boundary(i,1:2),2),'Color','red');
-        %text((point(boundary(i,1),1)+point(boundary(i,2),1))/2,(point(boundary(i,1),2)+point(boundary(i,2),2))/2,num2str(i));
-    end;
-end
+% figure()
+% for i = 1:size(boundary,1)
+%     hold on;
+%     if (mode<=boundary(i,4))
+%         line(point(boundary(i,1:2),1),point(boundary(i,1:2),2),'Color','blue');
+%         text((point(boundary(i,1),1)+point(boundary(i,2),1))./2,(point(boundary(i,1),2)+point(boundary(i,2),2))./2,num2str(i));
+%     else
+%         %line(point(boundary(i,1:2),1),point(boundary(i,1:2),2),'Color','red');
+%         %text((point(boundary(i,1),1)+point(boundary(i,2),1))/2,(point(boundary(i,1),2)+point(boundary(i,2),2))/2,num2str(i));
+%     end;
+% end;
+% hold off;
 end

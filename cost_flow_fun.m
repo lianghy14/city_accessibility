@@ -14,6 +14,6 @@ time_cost = 2 .* len_r ./v_r0(mode+1) .* (((1 - sum_f./wid_r) .^ (-0.5)) .* (sum
 obj2 = vot_m(mode+1) .* time_cost; % cost part 2
 obj3 = vot_m(mode+1) .* gama_m(mode+1) .* T_max ./ (1+yita_m(mode+1).*exp(-tao_m(mode+1).*time_cost)); % cost part 3
 obj = [obj1; obj2; obj3];  %cost function
-obj_tot = sum(obj,1);
+obj_tot = sum_f .* (sum(obj,1));
 
 end

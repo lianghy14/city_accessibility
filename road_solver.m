@@ -91,6 +91,6 @@ for i = 1:N2
     time_cost = 2 * boundary(i,3) /v_r0(mode+1) * (((1 - sum_f/boundary(i,4)) ^ (-0.5)) * (sum_f<=0.999) + (sum_f>0.999) * (((1 - 0.999/boundary(i,4)) ^ (-0.5)) + 1000*(sum_f - 0.999)));
     obj2 = vot_m(mode+1) * time_cost; % cost part 2
     obj3 = vot_m(mode+1) * gama_m(mode+1) * T_max / (1+yita_m(mode+1)*exp(-tao_m(mode+1)*time_cost)); % cost part 3
-    obj = obj + obj1 + obj2 + obj3; %cost function
+    obj =  obj + sum_f.*( obj1 + obj2 + obj3 ); %cost function
 end
 end
