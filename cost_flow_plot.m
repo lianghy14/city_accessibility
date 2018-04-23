@@ -4,8 +4,8 @@
 wid_r = 1;
 len_r = 2;
 mode = [0,1];  %1:vehicle; 0:cycling
-ylim_p = 11;
-sum_f = 0:0.02:0.8; %total flow ratio on a single road
+ylim_p = 10;
+sum_f = 0:0.02:0.9; %total flow ratio on a single road
 [obj_0,obj_tot_0,time_cost_0] = cost_flow_fun(wid_r,len_r,sum_f,mode(1));
 figure1 = figure(1);
 area(sum_f',obj_0');
@@ -22,8 +22,8 @@ ylim([0 ylim_p]);
 hold off
 
 figure3 = figure(3);
-len_r = 1;
-sum_f = 0:0.02:1;
+len_r = 2;
+sum_f = 0:0.02:0.98;
 [obj_0,obj_tot_0,time_cost_0] = cost_flow_fun(wid_r,len_r,sum_f,mode(1));
 [obj_1,obj_tot_1,time_cost_1] = cost_flow_fun(wid_r,len_r,sum_f,mode(2));
 [time_cost_BPR_0] = BPR_fun(wid_r,len_r,sum_f,mode(1));

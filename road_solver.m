@@ -45,7 +45,7 @@ b2((m-1)*N1+1) = [];
 %     end
 % end
 lb = zeros(N2*N3,1);
-options = optimoptions('fmincon','Diagnostics','on','Display','iter','MaxFunEvals',1000000,'TolFun',1e-4);
+options = optimoptions('fmincon','Diagnostics','on','Display','iter','MaxFunEvals',100000,'TolFun',1e-4);
 [f,fval] = fmincon(@obj_fun,f0,[],[],A2,b2,lb,[],[],options,boundary,OD,mode);
 
 for i = 1:N2
