@@ -12,10 +12,10 @@ mode = 0; %  0:cycling; 1:vehicle;
 %[OD_0,i_OD_0] = OD_gen(point_0,size_net,div,flow_OD(mode+1),i_OD_number);
 %f_0 = zeros(size(boundary_0,1)*size(OD_0,1)*size(OD_0,2),1)+0.01;
 %sum_f_0 = zeros(size(boundary_0,1),1)+0.6;
-f0 = f_0;
-tic;[f_0,fval_0,sum_f_0] = road_solver(point_0,boundary_0,OD_0,i_OD_0,i_OD_0,mode,f0);time_cal_0 = toc; % road solver
-map_0 = map_plot_fun(div,size_net,wid_cross,point_0,boundary_0,sum_f_0);
-
+%f0 = f_0;
+%tic;[f_0,fval_0,sum_f_0] = road_solver(point_0,boundary_0,OD_0,i_OD_0,i_OD_0,mode,f0);time_cal_0 = toc; % road solver
+%map_0 = map_plot_fun(div,size_net,wid_cross,point_0,boundary_0,sum_f_0);
+%Access_eval_0 = accessbility(mode,OD_0,boundary_0,sum_f_0,f_0);
 
 
 mode = 1; %  0:cycling; 1:vehicle;
@@ -23,16 +23,17 @@ mode = 1; %  0:cycling; 1:vehicle;
 %[OD_1,i_OD_1] = OD_gen(point_1,size_net,div,flow_OD(mode+1),i_OD_number);
 %f_1 = zeros(size(boundary_1,1)*size(OD_1,1)*size(OD_1,2),1)+0.01;
 %sum_f_1 = zeros(size(boundary_1,1),1)+0.6;
-f1 = f_1;
-tic;[f_1,fval_1,sum_f_1] = road_solver(point_1,boundary_1,OD_1,i_OD_1,i_OD_1,mode,f1);time_cal_1 = toc; % road solver
-map_1 = map_plot_fun(div,size_net,wid_cross,point_1,boundary_1,sum_f_1);
+%f1 = f_1;
+%tic;[f_1,fval_1,sum_f_1] = road_solver(point_1,boundary_1,OD_1,i_OD_1,i_OD_1,mode,f1);time_cal_1 = toc; % road solver
+%map_1 = map_plot_fun(div,size_net,wid_cross,point_1,boundary_1,sum_f_1);
+%Access_eval_1 = accessbility(mode,OD_1,boundary_1,sum_f_1,f_1);
 
 [figure_0] = figure_display(size_net,div,boundary_0,point_0,i_OD_0,sum_f_0,map_0);
 [figure_1] = figure_display(size_net,div,boundary_1,point_1,i_OD_1,sum_f_1,map_1);
 [figure_2] = figure_display(size_net,div,boundary_0,point_0,[],sum_f_0,map_0+map_1);
-saveas(figure_0,'0419figure\figure_size_2_mode_0.png');
-saveas(figure_1,'0419figure\figure_size_2_mode_1.png');
-saveas(figure_2,'0419figure\figure_size_2_mode_all.png');
+saveas(figure_0,'0528figure\figure_size_2_mode_0.png');
+saveas(figure_1,'0528figure\figure_size_2_mode_1.png');
+saveas(figure_2,'0528figure\figure_size_2_mode_all.png');
 fprintf('%d OD nodes cycling:',size(i_OD_0,1));
 disp(i_OD_0');
 fprintf('%d OD nodes vehicle:',size(i_OD_1,1));

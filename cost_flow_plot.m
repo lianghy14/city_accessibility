@@ -9,14 +9,14 @@ sum_f = 0:0.02:0.9; %total flow ratio on a single road
 [obj_0,obj_tot_0,time_cost_0] = cost_flow_fun(wid_r,len_r,sum_f,mode(1));
 figure1 = figure(1);
 area(sum_f',obj_0');
-legend('usage cost \itg_m','time cost \itg_T','comfort cost \itg_X','Location','NorthWest');
+legend('usage cost \itg_m','time cost \itg_T','comfort cost \itg_S','Location','NorthWest');
 xlabel('\itf_r');ylabel('\itg_r');
 ylim([0 ylim_p]);
 hold off
 [obj_1,obj_tot_1,time_cost_1] = cost_flow_fun(wid_r,len_r,sum_f,mode(2));
 figure2 = figure(2);
 area(sum_f',obj_1');
-legend('usage cost \itg_m','time cost \itg_T','comfort cost \itg_X','Location','NorthWest');
+legend('usage cost \itg_m','time cost \itg_T','comfort cost \itg_S','Location','NorthWest');
 xlabel('\itf_r');ylabel('\itg_r');
 ylim([0 ylim_p]);
 hold off
@@ -43,14 +43,14 @@ sum_f = 0.1;
 [obj_1,obj_tot_1,time_cost_1] = cost_flow_fun(wid_r,len_r,sum_f,mode(2));
 plot(len_r,obj_tot_0,'g-',len_r,obj_tot_1,'r-');
 legend('cycling','vehicle','Location','NorthWest');
-xlabel('\itl_r (km)');
+xlabel('\itd_r (km)');
 ylabel('\itg_r');
 ylim([0,Inf])
 hold off
 
-saveas(figure1,'0417figure\figure_model_1.png');
-saveas(figure2,'0417figure\figure_model_2.png');
-saveas(figure3,'0417figure\figure_model_3.png');
-saveas(figure4,'0417figure\figure_model_4.png');
+saveas(figure1,'0528figure\figure_model_1.png');
+saveas(figure2,'0528figure\figure_model_2.png');
+saveas(figure3,'0528figure\figure_model_3.png');
+saveas(figure4,'0528figure\figure_model_4.png');
 
 

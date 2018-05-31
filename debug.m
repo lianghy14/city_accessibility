@@ -5,4 +5,7 @@ for i = 1:size(boundary_0,1)
     hold on;
 end
 mark = plot(point_0(i_OD_0,1),point_0(i_OD_0,2),'rs','Markerfacecolor','r');hold on;
+for i = 1:size(i_OD_0)
+    text(point_0(i_OD_0(i),1),point_0(i_OD_0(i),2),num2str(i),'fontsize',20);hold on;
+end;
 hold off
